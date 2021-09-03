@@ -660,7 +660,7 @@ class Prompter():
         
         if password:
             # If the argument is for password entry, hide entry
-            in_val = getpass.getpass(prompt='%s: ' % msg)
+            in_val = getpass.getpass(prompt='->> %s: ' % msg)
         else:
             output = "\n->> %s: " % msg
             if msg.endswith('\n'):
@@ -756,7 +756,7 @@ The output parameter can be:
             
             user = self.config_info.get('RAPI', 'username')
             if user == '':
-                msg = "\nEnter the username for authentication"
+                msg = "Enter the username for authentication"
                 err_msg = "A username is required to order images."
                 user = self.get_input(msg, err_msg)
                 new_user = True
@@ -782,7 +782,7 @@ The output parameter can be:
                 suggestion = " (it is best to store the credentials if " \
                             "you'd like to run the script in silent mode)"
             
-            answer = input("\n> Would you like to store the credentials " \
+            answer = input("\n->> Would you like to store the credentials " \
                     "for a future session%s? (y/n):" % suggestion)
             if answer.lower().find('y') > -1:
                 self.config_info.set('RAPI', 'username', user)
@@ -877,7 +877,7 @@ The output parameter can be:
             # Get the CSV file
             #########################################
             
-            msg = "\nEnter the full path of the CSV file exported "\
+            msg = "Enter the full path of the CSV file exported "\
                         "from the EODMS UI website"
             input_fn = self.ask_inputFile(input_fn, msg)
             self.params['input'] = input_fn
@@ -942,7 +942,7 @@ The output parameter can be:
                         "file from a previous session.")
             
             # Get the CSV file
-            msg = "\nEnter the full path of the CSV Results file from a " \
+            msg = "Enter the full path of the CSV Results file from a " \
                 "previous session"
             input_fn = self.ask_inputFile(input_fn, msg)
             self.params['input'] = input_fn
