@@ -3,19 +3,19 @@ EODMS RAPI Search, Order & Download Python Script
 
 ## Overview
 
-The **eodms-orderdownload.py** script is used to search, order and download imagery from the EODMS using the REST API (RAPI) service.
+The **eodms_orderdownload.py** script is used to search, order and download imagery from the EODMS using the REST API (RAPI) service.
 
 ## Requirements
 
 ### Python
 
-The eodms-orderdownload.py was designed using **Python 3.7** however it has been tested successfully in Python 3.6.10. Using a version prior to Python 3.6 is not recommended as the script will not work properly.
+The eodms_orderdownload.py was designed using **Python 3.7** however it has been tested successfully in Python 3.6.10. Using a version prior to Python 3.6 is not recommended as the script will not work properly.
 
 ### Python Packages
 
 | Package Name  | Use                                                 | URL                                     |
 |---------------|-----------------------------------------------------|-----------------------------------------|
-| py-eodms-rapi | The EODMS Python package.                           | https://pypi.org/project/py-eodms-rapi/ |
+| py-eodms-rapi | The EODMS RAPI Python package.                      | https://pypi.org/project/py-eodms-rapi/ |
 | Requests      | Used to access the RAPI URL.                        | https://pypi.org/project/requests/      |
 | dateparser    | Used to parse a date like "24 hours".               | https://pypi.org/project/dateparser/    |
 | geomet        | Used to import WKT geometry text.                   | https://pypi.org/project/geomet/        |
@@ -39,12 +39,12 @@ The eodms-orderdownload.py was designed using **Python 3.7** however it has been
 3. Run the batch file and enter values when prompted:
 	
 	```dos
-	> eodms-orderdownload.bat
+	> eodms_orderdownload.bat
 	```
 
 ## User Guide
 
-For the full instructions on using the eodms-orderdownload script, please visit the [Search, Order & Download Image User Gude](https://github.com/nrcan-eodms-sgdot-rncan/eodms-rapi-orderdownload/wiki/Search,-Order-and-Download-Imagery-Script---Guide).
+For the full instructions on using the eodms_orderdownload script, please visit the [Search, Order & Download Image User Gude](https://github.com/nrcan-eodms-sgdot-rncan/eodms-rapi-orderdownload/wiki/Search,-Order-and-Download-Imagery-Script---Guide).
 
 ## Contact
 
