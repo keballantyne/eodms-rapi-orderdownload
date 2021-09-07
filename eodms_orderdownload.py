@@ -483,6 +483,8 @@ class Prompter():
             
             if self.process == 'order_csv':
                 
+                print("\n--------------Enter Images per Order--------------")
+                
                 if maximum.find(':') > -1:
                     total_records, order_limit = maximum.split(':')
                 else:
@@ -693,10 +695,10 @@ class Prompter():
                             'products.', \
                             formatter_class=argparse.RawTextHelpFormatter)
         
-        self.parser.add_argument('-u', '--username', help='The username of the ' \
-                            'EODMS account used for authentication.')
-        self.parser.add_argument('-p', '--password', help='The password of the ' \
-                            'EODMS account used for authentication.')
+        self.parser.add_argument('-u', '--username', help='The username of ' \
+                        'the EODMS account used for authentication.')
+        self.parser.add_argument('-p', '--password', help='The password of ' \
+                            'the EODMS account used for authentication.')
         input_help = '''An input file, can either be an AOI or a CSV file 
     exported from the EODMS UI. Valid AOI formats are GeoJSON, 
     KML or Shapefile (Shapefile requires the GDAL Python package).'''
@@ -704,20 +706,20 @@ class Prompter():
         coll_help = '''The collection of the images being ordered 
     (separate multiple collections with a comma).'''
         self.parser.add_argument('-c', '--collections', help=coll_help)
-        self.parser.add_argument('-f', '--filters', help='A list of filters for ' \
-                            'a specific collection.')
-        self.parser.add_argument('-l', '--priority', help='The priority level of '\
-                            'the order.\nOne of "Low", "Medium", "High" or ' \
-                            '"Urgent" (default "Medium").')
-        self.parser.add_argument('-d', '--dates', help='The date ranges for the ' \
-                            'search.')
+        self.parser.add_argument('-f', '--filters', help='A list of ' \
+                        'filters for a specific collection.')
+        self.parser.add_argument('-l', '--priority', help='The priority ' \
+                        'level of the order.\nOne of "Low", "Medium", ' \
+                        '"High" or "Urgent" (default "Medium").')
+        self.parser.add_argument('-d', '--dates', help='The date ranges ' \
+                        'for the search.')
         max_help = '''The maximum number of images to order and download 
     and the maximum number of images per order, separated by a colon.'''
         self.parser.add_argument('-m', '--maximum', help=max_help)
-        self.parser.add_argument('-r', '--process', help='The type of process to run ' \
-                            'from this list of options:\n- %s' % \
-                            '\n- '.join(["%s: %s" % (k, v) for k, v in \
-                            self.choices.items()]))
+        self.parser.add_argument('-r', '--process', help='The type of ' \
+                        'process to run from this list of options:\n- %s' % \
+                        '\n- '.join(["%s: %s" % (k, v) for k, v in \
+                        self.choices.items()]))
         output_help = '''The output file path containing the results in a geospatial format.
 The output parameter can be:
 - None (empty): No output will be created (a results CSV file will still be 
@@ -730,8 +732,10 @@ The output parameter can be:
     (use extension .shp)'''
         self.parser.add_argument('-o', '--output', help=output_help)
         self.parser.add_argument('-s', '--silent', action='store_true', \
-                            help='Sets process to silent ' \
-                            'which supresses all questions.')
+                        help='Sets process to silent which supresses all ' \
+                        'questions.')
+        self.parser.add_argument('-v', '--version', action='store_true', \
+                        help='Prints the version of the script.')
         
         args = self.parser.parse_args()
         
@@ -746,11 +750,20 @@ The output parameter can be:
         process = args.process
         output = args.output
         silent = args.silent
+        version = args.version
+        
+        if version:
+            print("EODMS RAPI Search, Order & Download Script: Version %s" \
+                % __version__)
+            sys.exit(0)
         
         self.eod.set_silence(silent)
                 
         new_user = False
         new_pass = False
+        
+        if user is None or password is None:
+            print("\n--------------Enter EODMS Credentials--------------")
         
         if user is None:
             
@@ -808,6 +821,7 @@ The output parameter can be:
                         'maximum': maximum, 
                         'process': process}
         
+        print()
         coll_lst = self.eod.eodms_rapi.get_collections(True)
         
         if coll_lst is None:

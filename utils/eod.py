@@ -1007,7 +1007,9 @@ class Eodms_OrderDownload:
             # print("filters: %s" % filters)
             # answer = input("Press enter...")
             
-            result_fields = list(filters.keys())
+            result_fields = []
+            if filters is not None:
+                result_fields = list(filters.keys())
             
             # Send a query to the EODMSRAPI object
             self.eodms_rapi.search(self.coll_id, filters, feats, dates, \
