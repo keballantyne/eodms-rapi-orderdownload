@@ -24,6 +24,7 @@
 # 
 ##############################################################################
 
+__title__ = 'EODMS RAPI Orderer & Downloader'
 __author__ = 'Kevin Ballantyne'
 __copyright__ = 'Copyright 2020-2021 Her Majesty the Queen in Right of Canada'
 __license__ = 'MIT License'
@@ -753,8 +754,7 @@ The output parameter can be:
         version = args.version
         
         if version:
-            print("EODMS RAPI Search, Order & Download Script: Version %s" \
-                % __version__)
+            print("%s: Version %s" % (__title__, __version__))
             sys.exit(0)
         
         self.eod.set_silence(silent)
@@ -1005,14 +1005,18 @@ def print_support(err_str=None):
         
 def main():
     
-    cmd_title = "EODMS Order-Downloader"
+    cmd_title = "EODMS Orderer-Downloader"
     os.system("title " + cmd_title)
     sys.stdout.write("\x1b]2;%s\x07" % cmd_title)
     
+    if '-v' in sys.argv or '--v' in sys.argv or '--version' in sys.argv:
+        print("\n  %s, version %s" % (__title__, __version__))
+        sys.exit(0)
+    
     print("\n##########################################################" \
             "#######################")
-    print("# EODMS API Orderer & Downloader                            " \
-            "                    #")
+    print("# %s                           " \
+            "                    #" % __title__)
     print("############################################################" \
             "#####################")
 
